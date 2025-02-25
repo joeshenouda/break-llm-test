@@ -88,7 +88,7 @@ def main():
                         help='input batch size for testing (default: 1000)')
     parser.add_argument('--epochs', type=int, default=14, metavar='N',
                         help='number of epochs to train (default: 14)')
-    parser.add_argument('--lr', type=float, default=1.0, metavar='LR',
+    parser.add_argument('--lr', type=float, default=1e-3, metavar='LR',
                         help='learning rate (default: 1.0)')
     parser.add_argument('--gamma', type=float, default=0.7, metavar='M',
                         help='Learning rate step gamma (default: 0.7)')
@@ -108,7 +108,7 @@ def main():
     use_cuda = not args.no_cuda and torch.cuda.is_available()
     use_mps = not args.no_mps and torch.backends.mps.is_available()
 
-    torch.manual_seed(args.seed)
+    # torch.manual_seed(args.seed)
 
     if use_cuda:
         device = torch.device("cuda")
@@ -152,7 +152,7 @@ def main():
         scheduler.step()
 
     if args.save_model:
-        torch.save(model.state_dict(), "mnist_mlp_{}_layers.pt".format(num_layers))
+        torch.save(model.state_dict(), "indep_mnist_mlp_{}_layers.pt".format(num_layers))
 
 
 if __name__ == '__main__':
